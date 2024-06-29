@@ -28,8 +28,4 @@ export class CurrenciesController {
     return this.currenciesService.update(+id, updateCurrencyDto);
   }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.currenciesService.remove(+id);
-  // }
 }

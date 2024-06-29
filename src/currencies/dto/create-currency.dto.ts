@@ -1,7 +1,18 @@
+// src/currencies/dto/create-currency.dto.ts
+import { IsBoolean, IsEnum, IsOptional, IsString } from 'class-validator';
+
 export class CreateCurrencyDto {
-    type: 'coin' | 'key';
-    name: string;
-    display_name: string;
-    is_active?: boolean;
-  }
-  
+  @IsEnum(['coin', 'key'])
+  type: 'coin' | 'key';
+
+  @IsString()
+  name: string;
+
+  @IsString()
+  display_name: string;
+
+  @IsOptional()
+  @IsBoolean()
+  is_active?: boolean;
+}
+

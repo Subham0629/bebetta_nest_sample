@@ -33,9 +33,4 @@ export class CurrenciesService {
     });
   }
 
-  // remove(id: number) {
-  //   return this.prisma.tbl_currencies.delete({
-  //     where: { id },
-  //   });
-  // }
 }
