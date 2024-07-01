@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
 import { InappStoreProductsService } from './inapp_store_products.service';
 import { CreateInappStoreProductDto } from './dto/create-inapp_store_product.dto';
 import { UpdateInappStoreProductDto } from './dto/update-inapp_store_product.dto';
@@ -22,13 +22,13 @@ export class InappStoreProductsController {
     return this.inappStoreProductsService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateInappStoreProductDto: UpdateInappStoreProductDto) {
     return this.inappStoreProductsService.update(+id, updateInappStoreProductDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.inappStoreProductsService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.inappStoreProductsService.remove(+id);
+  // }
 }
