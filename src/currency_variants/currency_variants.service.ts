@@ -16,7 +16,7 @@ export class CurrencyVariantsService {
   async findAll() {
     return this.prisma.tbl_currency_variants.findMany({
       include: {
-        currency: true, // Include related currency data
+        currency: true, 
       },
     });
   }
@@ -25,7 +25,7 @@ export class CurrencyVariantsService {
     return await this.prisma.tbl_currency_variants.findUnique({
       where: { id },
       include: {
-        currency: true, // Include related currency data
+        currency: true, 
       },
     });
   }

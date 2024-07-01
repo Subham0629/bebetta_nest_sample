@@ -51,6 +51,7 @@ model tbl_inapp_store_products {
   updated_at         DateTime           @updatedAt
 
   exchangeCurrency   tbl_currencies     @relation(fields: [exchange_currency_id], references: [id])
+  productVariants  tbl_inapp_store_product_variant[]
 }
 model tbl_currency_variants {
   id             Int      @id @default(autoincrement())
@@ -64,4 +65,20 @@ model tbl_currency_variants {
   currency       tbl_currencies @relation(fields: [currency_id], references: [id])
 
   @@index([currency_id])
+}
+
+model tbl_inapp_store_product_variant {
+  id                     Int                   @id @default(autoincrement())
+  inapp_store_product_id Int
+  display_name           String
+  description            String
+  price_units            Int
+  icon_url               String
+  is_active              Boolean               @default(true)
+  created_at             DateTime              @default(now())
+  updated_at             DateTime              @default(now()) @updatedAt
+
+  inappStoreProduct      tbl_inapp_store_products @relation(fields: [inapp_store_product_id], references: [id])
+
+  @@map("tbl_inapp_store_product_variant")
 }
