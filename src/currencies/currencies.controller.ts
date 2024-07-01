@@ -19,7 +19,7 @@ export class CurrenciesController {
   }
 
   @Get(':id')
-  findOne(@Body('id') id: string) {
+  findOne(@Param('id') id: string) {
     return this.currenciesService.findOne(+id);
   }
 
