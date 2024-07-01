@@ -22,12 +22,17 @@ export class InappStoreProductVariantsService {
   }
 
   async findAll(query: FilterInappStoreProductVariantDto) {
-    const { page = 1, limit = 10, sort = 'id', order = 'asc' } = query;
+    const { page , limit , sort = 'id', order = 'asc' } = query;
 
     const skip = (page - 1) * limit;
+    const take = +(limit);
 
     return await this.prisma.tbl_inapp_store_product_variant.findMany({
-      
+      skip,
+      take,
+      orderBy: {
+          [sort]: order,
+      },
       include: {
         inappStoreProduct: true, 
       },

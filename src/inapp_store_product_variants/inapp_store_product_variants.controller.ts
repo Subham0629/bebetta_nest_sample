@@ -16,7 +16,7 @@ export class InappStoreProductVariantsController {
 
   @Get()
   findAll(@Query() query: FilterInappStoreProductVariantDto) {
-    return this.inappStoreProductVariantService.findAll(query);
+    return this.inappStoreProductVariantsService.findAll(query);
   }
 
   @Get(':id')
