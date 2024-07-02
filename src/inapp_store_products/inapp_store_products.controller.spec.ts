@@ -11,7 +11,9 @@ describe('InappStoreProductsController', () => {
       providers: [InappStoreProductsService],
     }).compile();
 
-    controller = module.get<InappStoreProductsController>(InappStoreProductsController);
+    controller = module.get<InappStoreProductsController>(
+      InappStoreProductsController,
+    );
   });
 
   it('should be defined', () => {

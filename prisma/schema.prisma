@@ -36,6 +36,7 @@ model tbl_currencies {
   // Relation field to refer to InAppStoreProduct
   products    tbl_inapp_store_products[]
   variants    tbl_currency_variants[]
+  purchase_orders   tbl_inapp_product_purchase_orders[]
 }
 
 model tbl_inapp_store_products {
@@ -52,6 +53,7 @@ model tbl_inapp_store_products {
 
   exchangeCurrency   tbl_currencies     @relation(fields: [exchange_currency_id], references: [id])
   productVariants  tbl_inapp_store_product_variant[]
+  purchase_orders   tbl_inapp_product_purchase_orders[]
 }
 model tbl_currency_variants {
   id             Int      @id @default(autoincrement())
@@ -79,6 +81,41 @@ model tbl_inapp_store_product_variant {
   updated_at             DateTime              @default(now()) @updatedAt
 
   inappStoreProduct      tbl_inapp_store_products @relation(fields: [inapp_store_product_id], references: [id])
-
+  purchase_orders   tbl_inapp_product_purchase_orders[]
   @@map("tbl_inapp_store_product_variant")
+}
+
+model tbl_inapp_product_purchase_orders {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  product_id Int
+  variant_id Int
+  price_units Int
+  currency_id Int
+  details    String?
+  is_active  Boolean  @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  // Relations
+  product    tbl_inapp_store_products   @relation(fields: [product_id], references: [id])
+  variant    tbl_inapp_store_product_variant @relation(fields: [variant_id], references: [id])
+  currency   tbl_currencies  @relation(fields: [currency_id], references: [id])
+  redemptions  tbl_inapp_product_purchase_redemption[]
+
+  @@map("tbl_inapp_product_purchase_orders")
+}
+
+model tbl_inapp_product_purchase_redemption {
+  id          Int      @id @default(autoincrement())
+  order_id    Int
+  activate_at DateTime?
+  is_active   Boolean  @default(true)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now()) @updatedAt
+
+  // Relation
+  order tbl_inapp_product_purchase_orders @relation(fields: [order_id], references: [id])
+
+  @@map("tbl_inapp_product_purchase_redemption")
 }
