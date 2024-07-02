@@ -29,8 +29,5 @@ export class InappStoreProductVariantsController {
     return this.inappStoreProductVariantsService.update(+id, updateInappStoreProductVariantDto);
   }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.inappStoreProductVariantsService.remove(+id);
-  // }
+  
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../../prisma/prisma.service';
 import { CreateCurrencyVariantDto } from './dto/create-currency_variant.dto';
 import { UpdateCurrencyVariantDto } from './dto/update-currency_variant.dto';
 
@@ -15,31 +15,27 @@ export class CurrencyVariantsService {
 
   async findAll() {
     return this.prisma.tbl_currency_variants.findMany({
+      
+      where: { is_active: true },
       include: {
-        currency: true, 
+        currency: true,
       },
     });
   }
 
   async findOne(id: number) {
     return await this.prisma.tbl_currency_variants.findUnique({
-      where: { id },
+      where: { id, is_active: true },
       include: {
-        currency: true, 
+        currency: true,
       },
     });
   }
 
   async update(id: number, updateCurrencyVariantDto: UpdateCurrencyVariantDto) {
     return await this.prisma.tbl_currency_variants.update({
-      where: { id },
+      where: { id, is_active: true },
       data: updateCurrencyVariantDto,
     });
   }
-
-  // async remove(id: number) {
-  //   return await this.prisma.tbl_currency_variants.delete({
-  //     where: { id },
-  //   });
-  // }
 }

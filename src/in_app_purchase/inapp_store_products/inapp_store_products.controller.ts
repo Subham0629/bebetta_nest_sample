@@ -27,8 +27,5 @@ export class InappStoreProductsController {
     return this.inappStoreProductsService.update(+id, updateInappStoreProductDto);
   }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.inappStoreProductsService.remove(+id);
-  // }
+  
 }

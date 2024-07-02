@@ -82,3 +82,30 @@ model tbl_inapp_store_product_variant {
 
   @@map("tbl_inapp_store_product_variant")
 }
+
+enum SupportedBebettaConfig {
+  string
+  timestamp
+  integer
+  float
+  object
+}
+
+model tbl_bebetta_global_config {
+  id                Int                   @id @default(autoincrement())
+  bucket            String?
+  property_name     String?
+  property_value    String?
+  property_data_type SupportedBebettaConfig
+  is_active         Boolean               @default(true)
+  created_at        DateTime              @default(now())
+  updated_at        DateTime              @updatedAt
+}
+
+model tbl_ftue_category {
+  id          Int      @id @default(autoincrement())
+  type        String
+  is_active   Boolean  @default(true)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}

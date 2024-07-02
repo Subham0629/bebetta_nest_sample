@@ -27,8 +27,4 @@ export class CurrencyVariantsController {
     return this.currencyVariantsService.update(+id, updateCurrencyVariantDto);
   }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.currencyVariantsService.remove(+id);
-  // }
 }
