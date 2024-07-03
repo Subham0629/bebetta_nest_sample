@@ -37,7 +37,7 @@ export class FtueUserJourneyMilestonesController {
       properties: {
         user_id: { type: 'integer', example: 1 },
         journey_id: { type: 'integer', example: 1 },
-        last_completed_milestone_id: { type: 'integer', example: 1 },
+        last_completed_milestone_id: { type: 'integer', example: 0 },
         rewards_collected: { type: 'integer', example: 0 },
         is_active: { type: 'boolean', example: true },
       },

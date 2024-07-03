@@ -31,7 +31,7 @@ export class FtueJourneyMilestoneController {
         display_name: { type: 'string', example: 'First Milestone Display' },
         level: { type: 'number', example: 1 },
         is_active: { type: 'boolean', example: true },
-        reward_currency: { type: 'number', example: 100 },
+        reward_currency: { type: 'number', example: 1 },
         reward_units: { type: 'number', example: 10 },
       },
     },
