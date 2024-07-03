@@ -41,10 +41,4 @@ export class FtueJourneysService {
       data: updateFtueJourneyDto,
     });
   }
-
-  remove(id: number) {
-    return this.prisma.tbl_ftue_journeys.delete({
-      where: { id },
-    });
-  }
 }
