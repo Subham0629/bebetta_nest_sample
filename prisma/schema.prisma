@@ -37,6 +37,9 @@ model tbl_currencies {
   products    tbl_inapp_store_products[]
   variants    tbl_currency_variants[]
   purchase_orders   tbl_inapp_product_purchase_orders[]
+
+  // Relation field to refer to FTUE
+  milestones   tbl_ftue_journey_milestones[]
 }
 
 model tbl_inapp_store_products {
@@ -145,4 +148,49 @@ model tbl_ftue_category {
   is_active   Boolean  @default(true)
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
+
+  milestones   tbl_ftue_journey_milestones[]
 }
+
+model tbl_ftue_journeys {
+  id          Int      @id @default(autoincrement())
+  expiry_time String
+  is_active   Boolean  @default(true)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now()) @updatedAt
+
+  milestones  tbl_ftue_journey_milestones[]
+  user_journey_milestones tbl_ftue_user_journey_milestones[]
+}
+
+model tbl_ftue_journey_milestones {
+  id             Int      @id @default(autoincrement())
+  journey_id     Int
+  category_id    Int
+  name           String
+  display_name   String
+  level          Int
+  is_active      Boolean  @default(true)
+  reward_currency Int
+  reward_units   Int
+  created_at     DateTime @default(now())
+  updated_at     DateTime @default(now()) @updatedAt
+
+  journey     tbl_ftue_journeys @relation(fields: [journey_id], references: [id])
+  category    tbl_ftue_category @relation(fields: [category_id], references: [id])
+  currency    tbl_currencies    @relation(fields: [reward_currency], references: [id])
+}
+
+model tbl_ftue_user_journey_milestones {
+  id                           Int          @id @default(autoincrement())
+  user_id                      Int
+  journey_id                   Int
+  last_completed_milestone_level Int       @default(0)
+  rewards_collected            Int          @default(0)
+  is_active                    Boolean      @default(true)
+  created_at                   DateTime     @default(now())
+  updated_at                   DateTime     @default(now()) @updatedAt
+
+  journey                      tbl_ftue_journeys @relation(fields: [journey_id], references: [id])
+}
+

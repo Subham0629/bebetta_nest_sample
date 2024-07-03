@@ -10,9 +10,12 @@ import { InappProductPurchaseOrdersModule } from './in_app_purchase/inapp-produc
 import { InappProductPurchaseRedemptionModule } from './in_app_purchase/inapp-product-purchase-redemption/inapp-product-purchase-redemption.module';
 import { BebettaGlobalConfigModule } from './in_app_purchase/bebetta_global_config/bebetta_global_config.module';
 import { FtueCategoryModule } from './first_time_ux/ftue_category/ftue_category.module';
+import { FtueJourneysModule } from './first_time_ux/ftue_journeys/ftue_journeys.module';
+import { FtueJourneyMilestoneModule } from './first_time_ux/ftue_journey_milestone/ftue_journey_milestone.module';
+import { FtueUserJourneyMilestonesModule } from './first_time_ux/ftue_user_journey_milestones/ftue_user_journey_milestones.module';
 
 @Module({
-  imports: [CurrenciesModule, InappStoreProductsModule, CurrencyVariantsModule, InappStoreProductVariantsModule, InappProductPurchaseOrdersModule,InappProductPurchaseRedemptionModule, BebettaGlobalConfigModule, FtueCategoryModule],
+  imports: [CurrenciesModule, InappStoreProductsModule, CurrencyVariantsModule, InappStoreProductVariantsModule, InappProductPurchaseOrdersModule,InappProductPurchaseRedemptionModule, BebettaGlobalConfigModule, FtueCategoryModule, FtueJourneysModule, FtueJourneyMilestoneModule, FtueUserJourneyMilestonesModule],
   controllers: [AppController],
   providers: [AppService, PrismaService],
 })
