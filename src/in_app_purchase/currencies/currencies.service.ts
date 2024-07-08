@@ -2,6 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateCurrencyDto } from './dto/create-currency.dto';
+import { FilterCurrencyDto } from './dto/filter-currency.dto';
 import { UpdateCurrencyDto } from './dto/update-currency.dto';
 
 @Injectable()
@@ -14,9 +15,18 @@ export class CurrenciesService {
     });
   }
 
-  findAll() {
+  findAll(query: FilterCurrencyDto) {
+    const { page = 1, limit, sort = 'id', order = 'asc' } = query;
+
+    const skip = (page - 1) * (limit ?? 0);
+    const take = limit ? +limit : undefined;
     return this.prisma.tbl_currencies.findMany({
+      skip,
+      take,
       where: { is_active: true },
+      orderBy: {
+        [sort]: order,
+      },
     });
   }
 
@@ -32,10 +42,4 @@ export class CurrenciesService {
       data: updateCurrencyDto,
     });
   }
-
-  // remove(id: number) {
-  //   return this.prisma.tbl_currencies.delete({
-  //     where: { id },
-  //   });
-  // }
 }

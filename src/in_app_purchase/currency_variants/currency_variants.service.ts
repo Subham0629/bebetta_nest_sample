@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
+import { FilterCurrencyDto } from '../currencies/dto/filter-currency.dto';
 import { CreateCurrencyVariantDto } from './dto/create-currency_variant.dto';
 import { UpdateCurrencyVariantDto } from './dto/update-currency_variant.dto';
 
@@ -13,9 +14,18 @@ export class CurrencyVariantsService {
     });
   }
 
-  async findAll() {
+  async findAll(query: FilterCurrencyDto) {
+    const { page = 1, limit, sort = 'id', order = 'asc' } = query;
+
+    const skip = (page - 1) * (limit ?? 0);
+    const take = limit ? +limit : undefined;
     return this.prisma.tbl_currency_variants.findMany({
-      
+      skip,
+      take,
+      orderBy: {
+        [sort]: order,
+      },
+
       where: { is_active: true },
       include: {
         currency: true,

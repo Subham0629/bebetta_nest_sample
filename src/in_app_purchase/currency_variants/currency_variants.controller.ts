@@ -17,6 +17,7 @@ import {
 } from '@nestjs/swagger';
 import { CurrencyVariantsService } from './currency_variants.service';
 import { CreateCurrencyVariantDto } from './dto/create-currency_variant.dto';
+import { FilterCurrencyVariantDto } from './dto/filter-currency_variant.dto';
 import { UpdateCurrencyVariantDto } from './dto/update-currency_variant.dto';
 
 @ApiTags('currency-variants')
@@ -56,8 +57,8 @@ export class CurrencyVariantsController {
   @ApiOperation({ summary: 'Get all currency variants' })
   @ApiResponse({ status: 200, description: 'List of all currency variants.' })
   @ApiResponse({ status: 500, description: 'Internal Server Error' })
-  findAll() {
-    return this.currencyVariantsService.findAll();
+  findAll(@Query() query: FilterCurrencyVariantDto) {
+    return this.currencyVariantsService.findAll(query);
   }
 
   @Get(':id')

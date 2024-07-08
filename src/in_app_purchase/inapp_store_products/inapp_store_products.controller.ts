@@ -6,6 +6,7 @@ import {
   Put,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { InappStoreProductsService } from './inapp_store_products.service';
 import { CreateInappStoreProductDto } from './dto/create-inapp_store_product.dto';
@@ -17,6 +18,7 @@ import {
   ApiResponse,
   ApiParam,
 } from '@nestjs/swagger';
+import { FilterInappStoreProductDto } from './dto/filter-inapp_store_product.dto';
 
 @ApiTags('inapp-store-products')
 @Controller('inapp-store-products')
@@ -64,8 +66,8 @@ export class InappStoreProductsController {
     description: 'List of all in-app store products.',
   })
   @ApiResponse({ status: 500, description: 'Internal Server Error' })
-  findAll() {
-    return this.inappStoreProductsService.findAll();
+  findAll(@Query() query: FilterInappStoreProductDto) {
+    return this.inappStoreProductsService.findAll(query);
   }
 
   @Get(':id')

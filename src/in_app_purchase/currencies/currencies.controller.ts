@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Put,
+  Query,
 } from '@nestjs/common';
 import {
   ApiBody,
@@ -17,6 +18,7 @@ import {
 } from '@nestjs/swagger';
 import { CurrenciesService } from './currencies.service';
 import { CreateCurrencyDto } from './dto/create-currency.dto';
+import { FilterCurrencyDto } from './dto/filter-currency.dto';
 import { UpdateCurrencyDto } from './dto/update-currency.dto';
 
 @ApiTags('currencies')
@@ -50,8 +52,8 @@ export class CurrenciesController {
   @ApiOperation({ summary: 'Get all currencies' })
   @ApiResponse({ status: 200, description: 'List of all currencies.' })
   @ApiResponse({ status: 500, description: 'Internal Server Error' })
-  findAll() {
-    return this.currenciesService.findAll();
+  findAll(@Query() query: FilterCurrencyDto) {
+    return this.currenciesService.findAll(query);
   }
 
   @Get(':id')
@@ -86,8 +88,5 @@ export class CurrenciesController {
     return this.currenciesService.update(+id, updateCurrencyDto);
   }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.currenciesService.remove(+id);
-  // }
+
 }
