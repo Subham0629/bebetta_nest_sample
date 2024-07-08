@@ -14,7 +14,7 @@ export class FilterFtueJourneyDto {
 
   @IsOptional()
   @IsString()
-  @IsIn(['expiry', 'created_at', 'updated_at'])
+  @IsIn(['expiry', 'created_at', 'updated_at', 'id'])
   sort?: string;
 
   @IsOptional()

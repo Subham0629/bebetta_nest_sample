@@ -14,7 +14,7 @@ export class FilterFtueCategoryDto {
 
   @IsOptional()
   @IsString()
-  @IsIn(['type', 'created_at', 'updated_at'])
+  @IsIn(['type', 'created_at', 'updated_at', 'id'])
   sort?: string;
 
   @IsOptional()

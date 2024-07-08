@@ -17,6 +17,7 @@ import {
   ApiBody,
   ApiResponse,
   ApiParam,
+  ApiQuery,
 } from '@nestjs/swagger';
 import { FilterInappStoreProductDto } from './dto/filter-inapp_store_product.dto';
 
@@ -61,6 +62,9 @@ export class InappStoreProductsController {
 
   @Get()
   @ApiOperation({ summary: 'Get all in-app store products' })
+  @ApiQuery({ name: 'sort', required: false, type: String, example: 'id' })
+  @ApiQuery({ name: 'page', required: false, type: Number, example: 1 })
+  @ApiQuery({ name: 'limit', required: false, type: Number, example: 3 })
   @ApiResponse({
     status: 200,
     description: 'List of all in-app store products.',

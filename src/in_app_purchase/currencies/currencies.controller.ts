@@ -13,6 +13,7 @@ import {
   ApiBody,
   ApiOperation,
   ApiParam,
+  ApiQuery,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
@@ -50,6 +51,9 @@ export class CurrenciesController {
 
   @Get()
   @ApiOperation({ summary: 'Get all currencies' })
+  @ApiQuery({ name: 'sort', required: false, type: String, example: 'id' })
+  @ApiQuery({ name: 'page', required: false, type: Number, example: 1 })
+  @ApiQuery({ name: 'limit', required: false, type: Number, example: 3 })
   @ApiResponse({ status: 200, description: 'List of all currencies.' })
   @ApiResponse({ status: 500, description: 'Internal Server Error' })
   findAll(@Query() query: FilterCurrencyDto) {
@@ -87,6 +91,4 @@ export class CurrenciesController {
   ) {
     return this.currenciesService.update(+id, updateCurrencyDto);
   }
-
-
 }

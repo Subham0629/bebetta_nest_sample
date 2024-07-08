@@ -15,7 +15,7 @@ export class FilterInappStoreProductVariantDto {
 
   @IsOptional()
   @IsString()
-  @IsIn(['display_name', 'created_at', 'updated_at'])
+  @IsIn(['display_name', 'created_at', 'updated_at', 'id'])
   sort?: string;
 
   @IsOptional()

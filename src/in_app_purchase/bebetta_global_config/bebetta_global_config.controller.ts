@@ -16,6 +16,7 @@ import {
   ApiBody,
   ApiOperation,
   ApiParam,
+  ApiQuery,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
@@ -50,6 +51,9 @@ export class BebettaGlobalConfigController {
 
   @Get()
   @ApiOperation({ summary: 'Get all data from this api' })
+  @ApiQuery({ name: 'sort', required: false, type: String, example: 'id' })
+  @ApiQuery({ name: 'page', required: false, type: Number, example: 1 })
+  @ApiQuery({ name: 'limit', required: false, type: Number, example: 3 })
   @ApiResponse({
     status: 200,
     description: 'All data list',

@@ -49,11 +49,9 @@ export class FtueJourneyMilestoneController {
 
   @Get()
   @ApiOperation({ summary: 'Get all FTUE journey milestones' })
-  @ApiQuery({
-    name: 'query',
-    required: false,
-    type: FilterFtueJourneyMilestoneDto,
-  })
+  @ApiQuery({ name: 'sort', required: false, type: String, example: 'id' })
+  @ApiQuery({ name: 'page', required: false, type: Number, example: 1 })
+  @ApiQuery({ name: 'limit', required: false, type: Number, example: 3 })
   @ApiResponse({
     status: 200,
     description: 'List of all FTUE journey milestones.',

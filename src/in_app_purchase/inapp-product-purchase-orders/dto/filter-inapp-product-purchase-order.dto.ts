@@ -15,7 +15,7 @@ export class FilterInappProductPurchaseOrderDto {
 
   @IsOptional()
   @IsString()
-  @IsIn(['created_at', 'updated_at'])
+  @IsIn(['created_at', 'updated_at', 'id'])
   sort?: string;
 
   @IsOptional()

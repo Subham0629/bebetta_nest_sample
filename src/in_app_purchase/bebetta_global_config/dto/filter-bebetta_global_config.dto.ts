@@ -14,7 +14,7 @@ export class FilterBebettaGlobalConfigDto {
 
   @IsOptional()
   @IsString()
-  @IsIn(['bucket', 'property_name', 'created_at', 'updated_at'])
+  @IsIn(['bucket', 'property_name', 'created_at', 'updated_at', 'id'])
   sort?: string;
 
   @IsOptional()

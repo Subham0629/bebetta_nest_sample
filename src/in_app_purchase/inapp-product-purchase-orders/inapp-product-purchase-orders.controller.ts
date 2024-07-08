@@ -61,6 +61,9 @@ export class InappProductPurchaseOrdersController {
 
   @Get()
   @ApiOperation({ summary: 'Get all in-app product purchase orders' })
+  @ApiQuery({ name: 'sort', required: false, type: String, example: 'id' })
+  @ApiQuery({ name: 'page', required: false, type: Number, example: 1 })
+  @ApiQuery({ name: 'limit', required: false, type: Number, example: 3 })
   @ApiQuery({
     name: 'filter',
     required: false,
