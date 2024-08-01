@@ -194,3 +194,86 @@ model tbl_ftue_user_journey_milestones {
   journey                      tbl_ftue_journeys @relation(fields: [journey_id], references: [id])
 }
 
+model tbl_lotto_products {
+  id                 Int      @id @default(autoincrement())
+  name               String
+  display_name       String
+  description        String
+  info_details_html  String
+  is_active          Boolean?  @default(true)
+  created_at         DateTime @default(now())
+  updated_at         DateTime @default(now()) @updatedAt
+
+  // Relations
+  variants           tbl_lotto_variants[]
+  prize_variants     tbl_lotto_prize_variants[]
+  purchase_orders    tbl_lotto_purchase_orders[]
+
+  @@map("tbl_lotto_products")
+}
+
+model tbl_lotto_variants {
+  id                       Int                @id @default(autoincrement())
+  product_id               Int
+  display_name             String
+  description              String
+  real_money_price          Int
+  coin_price                Int
+  icon_url                 String
+  bet_coin_purchase_limit  Int
+  passes_limit             Int
+  is_active                Boolean?            @default(true)
+  created_at               DateTime           @default(now())
+  updated_at               DateTime           @default(now()) @updatedAt
+
+  // Relations
+  product                  tbl_lotto_products @relation(fields: [product_id], references: [id])
+  prize_variants            tbl_lotto_prize_variants[]
+  purchase_orders           tbl_lotto_purchase_orders[]
+
+  @@map("tbl_lotto_variants")
+}
+
+model tbl_lotto_prize_variants {
+  id            Int                 @id @default(autoincrement())
+  product_id    Int
+  variant_id    Int
+  rank          String
+  display_name  String
+  description   String
+  image_url     String
+  is_active     Boolean             @default(true)
+  created_at    DateTime            @default(now())
+  updated_at    DateTime            @default(now()) @updatedAt
+
+  product       tbl_lotto_products  @relation(fields: [product_id], references: [id])
+  variant       tbl_lotto_variants  @relation(fields: [variant_id], references: [id])
+
+  @@map("tbl_lotto_prize_variants")
+}
+
+enum currency {
+  coin
+  money
+}
+
+model tbl_lotto_purchase_orders {
+  id                 Int                     @id @default(autoincrement())
+  user_id            Int
+  product_id         Int
+  variant_id         Int
+  price_units        Int
+  purchase_currency  currency
+  win_rank           Int?                      @default(0)
+  is_active          Boolean?                 @default(true)
+  pass_number        Int
+  created_at         DateTime                @default(now())
+  updated_at         DateTime                @default(now()) @updatedAt
+
+  product            tbl_lotto_products      @relation(fields: [product_id], references: [id])
+  variant            tbl_lotto_variants      @relation(fields: [variant_id], references: [id])
+
+  @@map("tbl_lotto_purchase_orders")
+}
+
+

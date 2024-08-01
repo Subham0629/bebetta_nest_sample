@@ -13,9 +13,13 @@ import { FtueCategoryModule } from './first_time_ux/ftue_category/ftue_category.
 import { FtueJourneysModule } from './first_time_ux/ftue_journeys/ftue_journeys.module';
 import { FtueJourneyMilestoneModule } from './first_time_ux/ftue_journey_milestone/ftue_journey_milestone.module';
 import { FtueUserJourneyMilestonesModule } from './first_time_ux/ftue_user_journey_milestones/ftue_user_journey_milestones.module';
+import { LottoProductsModule } from './lotto-products/lotto-products.module';
+import { LottoVariantsModule } from './lotto-variants/lotto-variants.module';
+import { LottoPrizeVariantsModule } from './lotto-prize-variants/lotto-prize-variants.module';
+import { LottoPurchaseOrdersModule } from './lotto-purchase-orders/lotto-purchase-orders.module';
 
 @Module({
-  imports: [CurrenciesModule, InappStoreProductsModule, CurrencyVariantsModule, InappStoreProductVariantsModule, InappProductPurchaseOrdersModule,InappProductPurchaseRedemptionModule, BebettaGlobalConfigModule, FtueCategoryModule, FtueJourneysModule, FtueJourneyMilestoneModule, FtueUserJourneyMilestonesModule],
+  imports: [CurrenciesModule, InappStoreProductsModule, CurrencyVariantsModule, InappStoreProductVariantsModule, InappProductPurchaseOrdersModule,InappProductPurchaseRedemptionModule, BebettaGlobalConfigModule, FtueCategoryModule, FtueJourneysModule, FtueJourneyMilestoneModule, FtueUserJourneyMilestonesModule, LottoProductsModule, LottoVariantsModule, LottoPrizeVariantsModule, LottoPurchaseOrdersModule],
   controllers: [AppController],
   providers: [AppService, PrismaService],
 })
