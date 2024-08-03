@@ -17,9 +17,10 @@ import { LottoProductsModule } from './lotto-products/lotto-products.module';
 import { LottoVariantsModule } from './lotto-variants/lotto-variants.module';
 import { LottoPrizeVariantsModule } from './lotto-prize-variants/lotto-prize-variants.module';
 import { LottoPurchaseOrdersModule } from './lotto-purchase-orders/lotto-purchase-orders.module';
+import { LottoPassesModule } from './lotto-passes/lotto-passes.module';
 
 @Module({
-  imports: [CurrenciesModule, InappStoreProductsModule, CurrencyVariantsModule, InappStoreProductVariantsModule, InappProductPurchaseOrdersModule,InappProductPurchaseRedemptionModule, BebettaGlobalConfigModule, FtueCategoryModule, FtueJourneysModule, FtueJourneyMilestoneModule, FtueUserJourneyMilestonesModule, LottoProductsModule, LottoVariantsModule, LottoPrizeVariantsModule, LottoPurchaseOrdersModule],
+  imports: [CurrenciesModule, InappStoreProductsModule, CurrencyVariantsModule, InappStoreProductVariantsModule, InappProductPurchaseOrdersModule,InappProductPurchaseRedemptionModule, BebettaGlobalConfigModule, FtueCategoryModule, FtueJourneysModule, FtueJourneyMilestoneModule, FtueUserJourneyMilestonesModule, LottoProductsModule, LottoVariantsModule, LottoPrizeVariantsModule, LottoPurchaseOrdersModule, LottoPassesModule],
   controllers: [AppController],
   providers: [AppService, PrismaService],
 })

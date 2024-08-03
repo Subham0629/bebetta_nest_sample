@@ -7,10 +7,6 @@ import { UpdateLottoPurchaseOrderDto } from './dto/update-lotto-purchase-order.d
 export class LottoPurchaseOrdersService {
   constructor(private prisma: PrismaService) {}
 
-  generateEightDigitNumber(): number {
-    return Math.floor(10000000 + Math.random() * 90000000);
-  }
-
   async create(createLottoPurchaseOrderDto: CreateLottoPurchaseOrderDto) {
     const variant = await this.prisma.tbl_lotto_variants.findUnique({
       where: { id: createLottoPurchaseOrderDto.variant_id },
@@ -26,6 +22,7 @@ export class LottoPurchaseOrdersService {
       const existingOrdersCount =
         await this.prisma.tbl_lotto_purchase_orders.count({
           where: {
+            purchase_currency:'coin',
             variant_id: createLottoPurchaseOrderDto.variant_id,
             user_id: createLottoPurchaseOrderDto.user_id,
           },
@@ -38,29 +35,18 @@ export class LottoPurchaseOrdersService {
         );
       }
     }
-    // Generating an 8-digit random number for pass_number
-    let passNumber = this.generateEightDigitNumber();
+    // Update the pass record to set is_active to false
+  await this.prisma.tbl_lotto_passes.updateMany({
+    where: {
+      pass_number:createLottoPurchaseOrderDto.pass_number,
+      variant_id:createLottoPurchaseOrderDto.variant_id,
+    },
+    data: {
+      is_active: false,
+    },
+  });
 
-    // Checking if the generated pass_number already exists
-    let existingPassNumber =
-      await this.prisma.tbl_lotto_purchase_orders.findFirst({
-        where: {
-          pass_number: passNumber,
-        },
-      });
 
-    // If the pass_number already exists, generating a new one until a unique one is found
-    while (existingPassNumber) {
-      passNumber = this.generateEightDigitNumber();
-      existingPassNumber =
-        await this.prisma.tbl_lotto_purchase_orders.findFirst({
-          where: {
-            pass_number: passNumber,
-          },
-        });
-    }
-
-    createLottoPurchaseOrderDto.pass_number = passNumber;
     return this.prisma.tbl_lotto_purchase_orders.create({
       data: createLottoPurchaseOrderDto,
     });

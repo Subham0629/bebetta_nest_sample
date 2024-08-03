@@ -208,6 +208,7 @@ model tbl_lotto_products {
   variants           tbl_lotto_variants[]
   prize_variants     tbl_lotto_prize_variants[]
   purchase_orders    tbl_lotto_purchase_orders[]
+  lotto_passes       tbl_lotto_passes[]
 
   @@map("tbl_lotto_products")
 }
@@ -230,6 +231,7 @@ model tbl_lotto_variants {
   product                  tbl_lotto_products @relation(fields: [product_id], references: [id])
   prize_variants            tbl_lotto_prize_variants[]
   purchase_orders           tbl_lotto_purchase_orders[]
+  lotto_passes              tbl_lotto_passes[]
 
   @@map("tbl_lotto_variants")
 }
@@ -274,6 +276,23 @@ model tbl_lotto_purchase_orders {
   variant            tbl_lotto_variants      @relation(fields: [variant_id], references: [id])
 
   @@map("tbl_lotto_purchase_orders")
+}
+
+
+model tbl_lotto_passes {
+  id           Int                 @id @default(autoincrement())
+  product_id   Int
+  variant_id   Int
+  pass_number  Int
+  is_exhausted Boolean?             @default(false)
+  is_active    Boolean?             @default(true)
+  created_at   DateTime            @default(now())
+  updated_at   DateTime            @default(now()) @updatedAt
+
+  product      tbl_lotto_products  @relation(fields: [product_id], references: [id])
+  variant      tbl_lotto_variants  @relation(fields: [variant_id], references: [id])
+
+  @@map("tbl_lotto_passes")
 }
 
 
